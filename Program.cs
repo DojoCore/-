@@ -71,7 +71,7 @@ namespace pages
         public static double RunTest(int mc, int[] cmd, DispatchMode mode)
         {
             List<PageItem> table = new List<PageItem>();    //页表
-            Memory memory = new Memory(mc, mode);           //初始化内存和调度模式
+            MemoryList memory = MemoryListFactory.Create(mc, mode);   //初始化内存和调度模式
             for(int i = 0; i < cmd.Length/10;i++)
             {
                 table.Add(new PageItem() { Page = i });
@@ -96,8 +96,7 @@ namespace pages
                     failCount++;
                     MemBlock mem = null;    //可用内存单元
                     int? dis = null;        //移出页页号
-                    if (mode == DispatchMode.OPT) { mem = memory.GetMem(out dis, cmd, i); }
-                    else { mem = memory.GetMem(out dis); }
+                    mem = memory.GetMem(out dis, cmd, i);
                     next.InMemory = true;
                     mem.Page = next.Page;   //目标页进入内存
                     mem.Time = 0;           //清空内存驻留时间
@@ -110,7 +109,7 @@ namespace pages
 
 #if DEBUG
                 Console.WriteLine("当前指令 -> {0}", cmd[i]);
-                memory.PrintState();
+                memory.Show();
 #endif
             }
             return failCount * 100.0 / (failCount + accCount);

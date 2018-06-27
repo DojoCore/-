@@ -43,10 +43,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MemBlock.cs" />
-    <Compile Include="Memory.cs" />
     <Compile Include="PageItem.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="DispatchMode.cs" />
+    <Compile Include="MemoryList.cs" />
+    <Compile Include="MemoryListFactory.cs" />
+    <Compile Include="FIFOMemoryList.cs" />
+    <Compile Include="LRUMemoryList.cs" />
+    <Compile Include="OPTMemoryList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
